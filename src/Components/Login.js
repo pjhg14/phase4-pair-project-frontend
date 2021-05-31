@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   function logIn(e) {
     e.preventDefault();
@@ -12,7 +14,10 @@ function Login() {
       body: JSON.stringify({ email: email, password: password }),
     })
       .then((res) => res.json())
-      .then(console.log);
+      .then((message) => {
+        localStorage.token = message.token;
+        history.push("/rentals");
+      });
   }
 
   return (
