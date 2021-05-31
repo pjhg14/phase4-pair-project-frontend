@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 function RentalList() {
   const [rentals, setRentals] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:3000/host/1", {
+    fetch("http://localhost:3000/hosts/1", {
       method: "GET",
       headers: {
-        // "Content-Type": "application/json",
+        "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.token}`,
       },
     })
@@ -16,10 +16,10 @@ function RentalList() {
         setRentals(host.rentals);
       });
   }, []);
-  //   const rentalList = rentals.map((rental) => {
-  //     return <p key={rental.id}>{rental.address}</p>;
-  //   });
+  const rentalList = rentals.map((rental) => {
+    return <p key={rental.id}>{rental.address}</p>;
+  });
 
-  return <div></div>;
+  return <div>{rentalList}</div>;
 }
 export default RentalList;
