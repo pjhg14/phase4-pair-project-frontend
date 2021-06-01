@@ -6,6 +6,8 @@ import Login from "./Components/Login";
 import RentalList from "./Components/RentalList";
 import SignUp from "./Components/SignUp";
 import HostInfo from "./Components/HostInfo";
+import HostForm from "./Components/HostForm";
+import RentalInfo from "./Components/RentalInfo";
 
 function App() {
   return (
@@ -21,8 +23,14 @@ function App() {
         <Route exact path="/rentals">
           <RentalList />
         </Route>
-        <Route exact path="/host#info">
+        <Route exact path="/hostinfo">
           <HostInfo />
+        </Route>
+        <Route exact path="/hostform">
+          <HostForm />
+        </Route>
+        <Route exact path="/rentalinfo/:id">
+          <RentalInfo />
         </Route>
       </Switch>
     </div>
