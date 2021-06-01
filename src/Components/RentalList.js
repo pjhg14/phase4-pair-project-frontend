@@ -33,6 +33,7 @@ function RentalList() {
     <div>
       <Link to="/hostinfo">Welcome! {hostName}</Link>
       <h4>Rentals:</h4>
+      <Link to="/rentalform">New Rental</Link>
       {rentalList}
     </div>
   );

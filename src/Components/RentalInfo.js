@@ -1,10 +1,12 @@
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import { useState, useEffect } from "react";
 
 function RentalInfo() {
   const { id } = useParams();
   const [isLoaded, setIsLoaded] = useState(false);
   const [rental, setRental] = useState(null);
+
+  const history = useHistory();
 
   useEffect(() => {
     fetch(`http://localhost:3000/rentals/${id}`, {
@@ -24,6 +26,21 @@ function RentalInfo() {
 
   if (!isLoaded) return <h1>Loading...</h1>;
 
+  function handleDelete() {
+    fetch(`http://localhost:3000/rentals/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${localStorage.token}`,
+      },
+    })
+      .then((resp) => resp.json())
+      .then(function (message) {
+        console.log(message.message);
+        history.push("/rentals");
+      });
+  }
+
   return (
     <div>
       <p>Cost: {rental.cost} </p>
@@ -31,6 +48,7 @@ function RentalInfo() {
       <p>Max Guests: {rental.max_guests} </p>
       <p>Description: {rental.description} </p>
       <img src={rental.image} alt="Rental" />
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }

@@ -8,6 +8,7 @@ import SignUp from "./Components/SignUp";
 import HostInfo from "./Components/HostInfo";
 import HostForm from "./Components/HostForm";
 import RentalInfo from "./Components/RentalInfo";
+import RentalForm from "./Components/RentalForm";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route exact path="/rentalinfo/:id">
           <RentalInfo />
+        </Route>
+        <Route exact path="/rentalform">
+          <RentalForm />
         </Route>
       </Switch>
     </div>
