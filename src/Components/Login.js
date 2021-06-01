@@ -10,8 +10,13 @@ function Login() {
     e.preventDefault();
     fetch("http://localhost:3000/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email, password: password }),
+      headers: { 
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ 
+          email: email, 
+          password: password 
+        }),
     })
       .then((res) => res.json())
       .then((message) => {
@@ -20,24 +25,32 @@ function Login() {
       });
   }
 
+  function signup(event) {
+    history.push("/signup")
+  }
+
   return (
-    <form onSubmit={logIn}>
-      <label>Email</label>
-      <input
-        name="email"
-        type="text"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <label>Password</label>
-      <input
-        name="password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input type="submit" />
-    </form>
+    <div>
+      <p>Login</p>
+      <form onSubmit={logIn}>
+        <label>Email</label>
+        <input
+          name="email"
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <label>Password</label>
+        <input
+          name="password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <input type="submit" />
+      </form>
+      <button onClick={signup}>Sign Up</button>
+    </div>
   );
 }
 export default Login;
