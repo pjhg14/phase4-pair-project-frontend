@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 function RentalForm() {
   const [cost, setCost] = useState("");
@@ -10,14 +10,47 @@ function RentalForm() {
 
   const history = useHistory();
 
+  const { host_id, rental_id } = useParams();
+
   function formSubmit(e) {
     e.preventDefault();
+    if (host_id) {
+      handleAdd();
+    } else {
+      handleUpdate();
+    }
+  }
+
+  function handleUpdate() {
+    fetch(`http://localhost:3000/rentals/${rental_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${localStorage.token}`,
+      },
+      body: JSON.stringify({
+        cost: cost,
+        address: address,
+        max_guests: maxGuests,
+        description: description,
+        image: image,
+      }),
+    })
+      .then((resp) => resp.json())
+      .then(function (message) {
+        console.log(message.message);
+        history.push(`/rentalinfo/${rental_id}`);
+      });
+  }
+
+  function handleAdd() {
     fetch("http://localhost:3000/rentals", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        host_id: host_id,
         cost: cost,
         address: address,
         max_guests: maxGuests,
@@ -28,7 +61,7 @@ function RentalForm() {
       .then((res) => res.json())
       .then((rental) => {
         console.log(rental);
-        history.push(`/rental/${rental.id}`);
+        history.push(`/rentalinfo/${rental.id}`);
       });
   }
 

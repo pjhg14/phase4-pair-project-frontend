@@ -10,10 +10,11 @@ function HostForm() {
 
   function update(event) {
     event.preventDefault();
-    fetch("http://localhost:3000/hosts", {
-      method: "POST",
+    fetch("http://localhost:3000/hosts/1", {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
       },
       body: JSON.stringify({
         name: name,
@@ -24,8 +25,9 @@ function HostForm() {
       .then((res) => res.json())
       .then((message) => {
         if (message.error) {
+          console.log(message.error);
         } else {
-          localStorage.token = message.token;
+          console.log(message);
           history.push("/hostinfo");
         }
       });

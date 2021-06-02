@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function RentalList() {
   const [rentals, setRentals] = useState([]);
-  const [hostName, setHostName] = useState("");
+  const [host, setHost] = useState("");
 
   useEffect(() => {
     fetch("http://localhost:3000/hosts/get", {
@@ -16,7 +16,7 @@ function RentalList() {
       .then((resp) => resp.json())
       .then(function (host) {
         console.log(host);
-        setHostName(host.name);
+        setHost(host);
         setRentals(host.rentals);
       });
   }, []);
@@ -31,9 +31,9 @@ function RentalList() {
 
   return (
     <div>
-      <Link to="/hostinfo">Welcome! {hostName}</Link>
+      <Link to="/hostinfo">Welcome! {host.name}</Link>
       <h4>Rentals:</h4>
-      <Link to="/rentalform">New Rental</Link>
+      <Link to={`/rentalform/host/${host.id}`}>New Rental</Link>
       {rentalList}
     </div>
   );

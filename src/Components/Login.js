@@ -10,13 +10,13 @@ function Login() {
     e.preventDefault();
     fetch("http://localhost:3000/login", {
       method: "POST",
-      headers: { 
-        "Content-Type": "application/json"
+      headers: {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ 
-          email: email, 
-          password: password 
-        }),
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
     })
       .then((res) => res.json())
       .then((message) => {
@@ -26,7 +26,7 @@ function Login() {
   }
 
   function signup(event) {
-    history.push("/signup")
+    history.push("/signup");
   }
 
   return (

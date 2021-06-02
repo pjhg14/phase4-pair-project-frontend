@@ -33,7 +33,10 @@ function App() {
         <Route exact path="/rentalinfo/:id">
           <RentalInfo />
         </Route>
-        <Route exact path="/rentalform">
+        <Route exact path="/rentalform/host/:host_id">
+          <RentalForm />
+        </Route>
+        <Route exact path="/rentalform/:rental_id">
           <RentalForm />
         </Route>
       </Switch>

@@ -1,5 +1,6 @@
 import { useParams, useHistory } from "react-router";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function RentalInfo() {
   const { id } = useParams();
@@ -49,6 +50,7 @@ function RentalInfo() {
       <p>Description: {rental.description} </p>
       <img src={rental.image} alt="Rental" />
       <button onClick={handleDelete}>Delete</button>
+      <Link to={`/rentalform/${rental.id}`}>Update</Link>
     </div>
   );
 }
