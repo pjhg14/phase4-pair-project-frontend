@@ -2,13 +2,13 @@
 import "./App.css";
 import { Switch, Route } from "react-router";
 import Header from "./Components/Header";
-import Login from "./Components/Login";
-import RentalList from "./Components/RentalList";
-import SignUp from "./Components/SignUp";
-import HostInfo from "./Components/HostInfo";
-import HostForm from "./Components/HostForm";
-import RentalInfo from "./Components/RentalInfo";
-import RentalForm from "./Components/RentalForm";
+import RentalList from "./Components/main-content/RentalList";
+import HostInfo from "./Components/main-content/HostInfo";
+import HostForm from "./Components/main-content/HostForm";
+import RentalInfo from "./Components/main-content/RentalInfo";
+import RentalForm from "./Components/main-content/RentalForm";
+import RenterUser from "./Components/RenterUser";
+import HostUser from "./Components/HostUser";
 
 function App() {
   return (
@@ -16,12 +16,12 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/">
-          <Login />
+          <HostUser />
         </Route>
-        <Route exact path="/signup">
-          <SignUp />
+        <Route exact path="/renter/portal">
+          <RenterUser />
         </Route>
-        <Route exact path="/rentals">
+        <Route exact path="/rentals/:type">
           <RentalList />
         </Route>
         <Route exact path="/hostinfo">
