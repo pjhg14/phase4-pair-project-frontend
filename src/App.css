@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.rental-form {
+  width: 75%;
+  padding-left: 25%;
+}
+
+.host-form {
+  width: 75%;
+  padding-left: 25%;
+}
+
+#title {
+  font-family: cursive;
+}

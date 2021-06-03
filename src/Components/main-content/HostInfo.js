@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Button, Icon } from "semantic-ui-react";
 
 function HostInfo() {
   const [host, setHost] = useState({
@@ -26,7 +27,7 @@ function HostInfo() {
   }, []);
 
   function toRentalList(event) {
-    history.push("/rentals");
+    history.push("/rentals/host");
   }
 
   function toHostForm(event) {
@@ -35,13 +36,20 @@ function HostInfo() {
 
   return (
     <div>
-      <p>Name: {host.name}</p>
-      <p>Email: {host.email}</p>
-      <p>Phone: {host.phone}</p>
-      <p>About: {host.about}</p>
-
-      <button onClick={toRentalList}>Back</button>
-      <button onClick={toHostForm}>Update Info</button>
+      <p>
+        <Icon name="user"></Icon> {host.name}
+      </p>
+      <p>
+        <Icon name="mail"></Icon> {host.email}
+      </p>
+      <p>
+        <Icon name="phone"></Icon> {host.phone}
+      </p>
+      <p>
+        <Icon name="info circle"></Icon> {host.about}
+      </p>
+      <Button onClick={toRentalList}>Back</Button>
+      <Button onClick={toHostForm}>Update Info</Button>
     </div>
   );
 }

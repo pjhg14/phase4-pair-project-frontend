@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory, useParams } from "react-router";
+import { Form, Button } from "semantic-ui-react";
 
 function RentalForm() {
   const [cost, setCost] = useState("");
@@ -39,7 +40,7 @@ function RentalForm() {
       .then((resp) => resp.json())
       .then(function (message) {
         console.log(message.message);
-        history.push(`/rentalinfo/${rental_id}`);
+        history.push(`/rentals/host`);
       });
   }
 
@@ -61,44 +62,54 @@ function RentalForm() {
       .then((res) => res.json())
       .then((rental) => {
         console.log(rental);
-        history.push(`/rentalinfo/${rental.id}`);
+        history.push(`/rentals/host`);
       });
   }
 
   return (
-    <div>
-      <form onSubmit={formSubmit}>
-        <label>Cost: </label>
-        <input
-          type="text"
-          value={cost}
-          onChange={(e) => setCost(e.target.value)}
-        />
-        <label>Address: </label>
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <label>Max Guests: </label>
-        <input
-          type="text"
-          value={maxGuests}
-          onChange={(e) => setMaxGuests(e.target.value)}
-        />
-        <label>Description: </label>
-        <textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
-        <label>Image: </label>
-        <input
-          type="text"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
-        <input type="submit" />
-      </form>
+    <div className="form-container">
+      <Form className="rental-form" onSubmit={formSubmit}>
+        <Form.Field>
+          <label>Cost: </label>
+          <input
+            type="text"
+            value={cost}
+            onChange={(e) => setCost(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Address: </label>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Max Guests: </label>
+          <input
+            type="text"
+            value={maxGuests}
+            onChange={(e) => setMaxGuests(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Description: </label>
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          ></textarea>
+        </Form.Field>
+        <Form.Field>
+          <label>Image: </label>
+          <input
+            type="text"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </Form.Field>
+        <Button type="submit">Submit</Button>{" "}
+      </Form>
     </div>
   );
 }
