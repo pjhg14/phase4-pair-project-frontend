@@ -6,6 +6,9 @@ import Login from "./Components/Login";
 import RentalList from "./Components/RentalList";
 import SignUp from "./Components/SignUp";
 import HostInfo from "./Components/HostInfo";
+import HostForm from "./Components/HostForm";
+import RentalInfo from "./Components/RentalInfo";
+import RentalForm from "./Components/RentalForm";
 
 function App() {
   return (
@@ -21,8 +24,20 @@ function App() {
         <Route exact path="/rentals">
           <RentalList />
         </Route>
-        <Route exact path="/host#info">
+        <Route exact path="/hostinfo">
           <HostInfo />
+        </Route>
+        <Route exact path="/hostform">
+          <HostForm />
+        </Route>
+        <Route exact path="/rentalinfo/:id">
+          <RentalInfo />
+        </Route>
+        <Route exact path="/rentalform/host/:host_id">
+          <RentalForm />
+        </Route>
+        <Route exact path="/rentalform/:rental_id">
+          <RentalForm />
         </Route>
       </Switch>
     </div>
