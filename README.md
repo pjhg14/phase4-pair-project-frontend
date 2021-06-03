@@ -15,4 +15,5 @@
 - 
 
 ### Notes
-- Paul: remember to start server by entering ```sudo service postgresql start```
+- Paul: remember to start server by entering ```sudo service postgresql start``` 
+- check if postgresql is running with ```pstree | head -n 5``` 
