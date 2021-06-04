@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import { Button, Image, Modal } from "semantic-ui-react";
 
-function AppointmentInfo({ id }) {
+function AppointmentInfo({ id, forceUpdate }) {
     const [isLoaded, setIsLoaded] = useState(false);
     const [appointment, setAppointment] = useState(null);
 
@@ -20,7 +20,16 @@ function AppointmentInfo({ id }) {
     if (!isLoaded) return <h1>Loading...</h1>;
 
     function handleDelete() {
-        
+        fetch("http://localhost:3000/appointments/" + id, {
+            method: "DELETE",
+        })
+            .then((resp) => resp.json())
+            .then(message => {
+                console.log(message)
+                if (!message.error) {
+                    forceUpdate()
+                }
+            });
     }
 
     return(
@@ -45,10 +54,10 @@ function AppointmentInfo({ id }) {
                     <p>End Date {appointment.end_date}</p>
                     <p>Number of guests: {appointment.num_guests}</p>
 
-                    <Link to={"/reserve"}>Update Appointment</Link>
+                    <Link to={`/reserve/${id}`}>Update Appointment</Link>
                     <br></br>
                     <br></br>
-                    <Button onClick={handleDelete}>Delete</Button>
+                    <Button onClick={handleDelete}>Cancel</Button>
                 </Modal.Description>
             </Modal.Content>
         </Modal>

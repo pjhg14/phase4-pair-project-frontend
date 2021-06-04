@@ -41,9 +41,6 @@ function App() {
         <Route exact path="/rentalform/:rental_id">
           <RentalForm />
         </Route> 
-        <Route exact path="/redirect">
-          <Redirect />
-        </Route>
         {/* Renter Routes */}
         <Route exact path="/renterpage">
           <RenterPage />

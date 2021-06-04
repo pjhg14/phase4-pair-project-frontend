@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
-import { Button } from "semantic-ui-react";
+import { Link, useHistory } from "react-router-dom";
+import { Button, Icon, Popup } from "semantic-ui-react";
 import FullRentalList from "./FullRentalList";
 import RenterRentalList from "./RenterRentalList";
 
@@ -9,6 +9,8 @@ function RenterPage() {
         name: ""
     })
     const [cardToggle, setCardToggle] = useState(true)
+
+    const history = useHistory()
 
     useEffect(() => {
         fetch("http://localhost:3000/renters/get", {
@@ -25,10 +27,16 @@ function RenterPage() {
         });
     },[])
 
+    function logOff() {
+        localStorage.token = ""
+        history.push("/")
+    }
+
     return(
         <div>
             <p>
                 Welcome! <Link to="/renterinfo"> {renter.name} </Link>
+                <Popup content="Log Off" trigger={<Icon name="power" onClick={() => logOff()} />} />
             </p>
             <Button onClick={() => setCardToggle(!cardToggle)}>
                 {cardToggle ? "All" : "Appointments"}

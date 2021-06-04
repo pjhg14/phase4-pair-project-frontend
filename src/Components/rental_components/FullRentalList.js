@@ -32,9 +32,9 @@ function FullRentalList() {
     })
 
     return(
-        <div>
+        <Card.Group className="custom">
             {rentalCards}
-        </div>
+        </Card.Group >
     )
 }
 

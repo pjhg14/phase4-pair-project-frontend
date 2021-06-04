@@ -52,7 +52,6 @@ function RenterForm() {
           });
       }
 
-
     return(
         <div className="form-container">
             <Form className="rental-form" onSubmit={update}>

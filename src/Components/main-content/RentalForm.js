@@ -22,7 +22,7 @@ function RentalForm() {
         },
       })
         .then((resp) => resp.json())
-        .then(function (rental) {
+        .then(rental => {
           console.log(rental);
           setCost(rental.cost);
           setAddress(rental.address);
@@ -58,9 +58,12 @@ function RentalForm() {
       }),
     })
       .then((resp) => resp.json())
-      .then(function (message) {
-        console.log(message.message);
-        history.push(`/rentals/host`);
+      .then(message => {
+        console.log(message)
+        
+        if (!message.error) {
+          history.push(`/rentals/host`);
+        }
       });
   }
 
@@ -80,9 +83,12 @@ function RentalForm() {
       }),
     })
       .then((res) => res.json())
-      .then((rental) => {
-        console.log(rental);
-        history.push(`/rentals/host`);
+      .then(message => {
+        console.log(message)
+
+        if (!message.error) {
+          history.push(`/rentals/host`);
+        }
       });
   }
 

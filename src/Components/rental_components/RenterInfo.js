@@ -44,9 +44,6 @@ function RenterInfo() {
             <p>
                 <Icon name="phone"></Icon> {renter.phone}
             </p>
-            <p>
-                <Icon name="info circle"></Icon> {renter.about}
-            </p>
             <Button onClick={toRenterPage}>Back</Button>
             <Button onClick={toRenterForm}>Update Info</Button>
         </div>

@@ -5,6 +5,7 @@ import AppointmentInfo from "./AppointmentInfo";
 function RenterRentalList({ appointmentList }) {
     const [appointments, setAppointments] = useState([])
     const [rentals, setRentals] = useState([])
+    const [value, setValue] = useState(true)
 
     useEffect(() => {
         fetch("http://localhost:3000/renters/get", {
@@ -20,14 +21,10 @@ function RenterRentalList({ appointmentList }) {
                 setAppointments(queriedRenter.appointments);
                 setRentals(queriedRenter.rentals)
             });
-      }, []);
+      }, [value]);
 
-    function handleDelete(target) {
-        const filteredList = appointments.filter(appointment => {
-            return target.id !== appointment.id
-        })
-
-        setAppointments(filteredList)
+    function forceUpdate() {
+        setValue(!value)
     }
 
     console.log(rentals)
@@ -35,26 +32,26 @@ function RenterRentalList({ appointmentList }) {
         const rental = rentals.filter(rental => rental.id === appointment.rental_id)[0]
         console.log(rentals)
 
-        if (rentals) {
+        if (rentals.length !== 0) {
            return(
             <Card
                 key={appointment.id}
                 image={rental.image}
                 header={`Appointment on: ${appointment.start_date}`}
                 meta={`Address: ${rental.address}`}
-                extra={<AppointmentInfo id={appointment.id} onDelete={handleDelete}/>}
+                extra={<AppointmentInfo id={appointment.id} forceUpdate={forceUpdate}/>}
             />
         ) 
         }else {
-            return
+            return <Card/>
         }
         
     })
 
     return(
-        <div>
+        <Card.Group className="custom">
             {rentalCards}
-        </div>
+        </Card.Group>
     )
 }
 

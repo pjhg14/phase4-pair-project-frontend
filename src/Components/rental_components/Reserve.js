@@ -3,8 +3,8 @@ import { useHistory, useParams } from "react-router"
 import { Form } from "semantic-ui-react"
 
 function Reserve() {
-    const [start, setStart] = useState(new Date())
-    const [end, setEnd] = useState(new Date())
+    const [start, setStart] = useState("")
+    const [end, setEnd] = useState("")
     const [guests, setGuests] = useState("")
     const [renterId, setRenterId] = useState("")
 
@@ -32,8 +32,27 @@ function Reserve() {
                 .then(appointment => {
                     console.log(appointment);
 
-                    setStart(appointment.start_date)
-                    setEnd(appointment.end_date)
+                    // matcher = /^(\d{2})\.(\d{2})\.(\d{4}) (\d{2}):(\d{2}):(\d{2})$/
+                    // matcher = /^(\d{4})\-(\d{2})\-(\d{2})T(\d{2}):(\d{2}):(\d{2})$/
+                    console.log(appointment.start_date)
+                    console.log(appointment.end_date)
+
+                    let startDateConversion = appointment.start_date
+                    let endDateConversion = appointment.end_date
+
+                    if (!startDateConversion.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/)) {
+                        let pos = appointment.start_date.indexOf(":", 16)
+                        startDateConversion = appointment.start_date.slice(0, pos) 
+                    }
+                    
+                    if (!endDateConversion.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/)) {
+                        let pos = appointment.end_date.indexOf(":", 16)
+                        endDateConversion = appointment.end_date.slice(0, pos)
+                    }
+                    
+
+                    setStart(startDateConversion)
+                    setEnd(endDateConversion)
                     setGuests(appointment.num_guests)
                 });
         }
@@ -66,9 +85,12 @@ function Reserve() {
             }),
         })
             .then(res => res.json())
-            .then(rental => {
-                console.log(rental);
-                history.push(`/renterpage`);
+            .then(message => {
+                if (message.error) {
+                    console.log(message);
+                } else {
+                    history.push(`/renterpage`);
+                }
             });
     }
 
@@ -86,8 +108,11 @@ function Reserve() {
         })
             .then((resp) => resp.json())
             .then(message => {
-                console.log(message.message);
-                history.push("/renterpage");
+                if (message.error) {
+                    console.log(message);
+                } else {
+                    history.push(`/renterpage`);
+                }
             });
     }
 
@@ -97,10 +122,10 @@ function Reserve() {
                 <Form.Group>
                     <label>Start Date:</label>
                     <input name="start-date" type="datetime-local" value={start} 
-                        onChange={e => setStart(e.target.value)} min={new Date()}/>
+                        onChange={e => setStart(e.target.value)}/>
                     <label>End Date:</label>
                     <input name="end-date" type="datetime-local" value={end} 
-                        onChange={e => setEnd(e.target.value)} min={Date().getTime}/>
+                        onChange={e => setEnd(e.target.value)}/>
                     <Form.Input label="Number of guests" placeholder="# Guests" value={guests} 
                         onChange={e => setGuests(e.target.value)}/>
                 </Form.Group>
