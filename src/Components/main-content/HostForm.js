@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Form, Button } from "semantic-ui-react";
 
@@ -6,8 +6,27 @@ function HostForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [about, setAbout] = useState("");
 
   const history = useHistory();
+
+  useEffect(() => {
+    fetch("http://localhost:3000/hosts/get", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    })
+      .then((resp) => resp.json())
+      .then(function (host) {
+        console.log(host);
+        setName(host.name);
+        setEmail(host.email);
+        setPhone(host.phone);
+        setAbout(host.about);
+      });
+  }, []);
 
   function update(event) {
     event.preventDefault();
@@ -64,6 +83,15 @@ function HostForm() {
             type="text"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>About</label>
+          <textarea
+            name="about"
+            type="text"
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
           />
         </Form.Field>
         <Button type="submit">Submit</Button>{" "}

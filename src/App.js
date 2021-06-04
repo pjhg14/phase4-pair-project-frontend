@@ -1,6 +1,6 @@
 // import logo from "./logo.svg";
 import "./App.css";
-import { Switch, Route, Redirect } from "react-router";
+import { Switch, Route } from "react-router";
 import Title from "./Components/Title";
 import RentalList from "./Components/main-content/RentalList";
 import HostInfo from "./Components/main-content/HostInfo";
@@ -38,9 +38,6 @@ function App() {
         </Route>
         <Route exact path="/rentalform/:rental_id">
           <RentalForm />
-        </Route>
-        <Route exact path="/redirect">
-          <Redirect />
         </Route>
       </Switch>
     </div>

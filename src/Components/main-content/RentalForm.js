@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { Form, Button } from "semantic-ui-react";
 
@@ -12,6 +12,26 @@ function RentalForm() {
   const history = useHistory();
 
   const { host_id, rental_id } = useParams();
+
+  useEffect(() => {
+    if (rental_id) {
+      fetch(`http://localhost:3000/rentals/${rental_id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((resp) => resp.json())
+        .then(function (rental) {
+          console.log(rental);
+          setCost(rental.cost);
+          setAddress(rental.address);
+          setMaxGuests(rental.max_guests);
+          setDescription(rental.description);
+          setImage(rental.image);
+        });
+    }
+  }, [rental_id]);
 
   function formSubmit(e) {
     e.preventDefault();

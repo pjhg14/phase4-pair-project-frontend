@@ -6,8 +6,13 @@ import RentalInfo from "./RentalInfo";
 function RentalList() {
   const [rentals, setRentals] = useState([]);
   const [host, setHost] = useState("");
+  const [value, setValue] = useState(false);
 
   const { type } = useParams();
+
+  function forceUpdate() {
+    setValue(!value);
+  }
 
   useEffect(() => {
     if (type === "host") {
@@ -51,7 +56,7 @@ function RentalList() {
       //     setRentals(rentals);
       //   });
     }
-  }, [type]);
+  }, [type, value]);
 
   const rentalList = rentals.map((rental) => {
     return (
@@ -60,7 +65,7 @@ function RentalList() {
         image={rental.image}
         header={rental.address}
         meta={`Max guests: ${rental.max_guests}`}
-        extra={<RentalInfo rental_id={rental.id} />}
+        extra={<RentalInfo forceUpdate={forceUpdate} rental_id={rental.id} />}
       />
     );
   });
@@ -73,7 +78,7 @@ function RentalList() {
       </p>
       <h4>Rentals:</h4>
       <Link to={`/rentalform/host/${host.id}`}>New Rental</Link>
-      <div>{rentalList}</div>
+      <Card.Group className="custom">{rentalList}</Card.Group>
     </div>
   );
 }

@@ -1,13 +1,10 @@
-import { useHistory } from "react-router";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button, Image, Modal } from "semantic-ui-react";
 
-function RentalInfo({ rental_id }) {
+function RentalInfo({ rental_id, forceUpdate }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [rental, setRental] = useState(null);
-
-  const history = useHistory();
 
   const [open, setOpen] = useState(false);
 
@@ -41,7 +38,8 @@ function RentalInfo({ rental_id }) {
       .then((resp) => resp.json())
       .then(function (message) {
         console.log(message.message);
-        history.push("/redirect");
+        setOpen(false);
+        forceUpdate();
       });
   }
 
