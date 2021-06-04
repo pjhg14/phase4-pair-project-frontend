@@ -56,10 +56,10 @@ function RenterUser() {
   }
 
   return (
-    <div>
+    <div className="form-container">
       <p>{lsToggle ? "Login" : "Sign Up"} as Renter</p>
       {lsToggle ? (
-        <Form onSubmit={logIn}>
+        <Form className="login-form" onSubmit={logIn}>
           <Form.Field>
             <label>Email</label>
             <input
@@ -81,7 +81,7 @@ function RenterUser() {
           <Button type="submit">Submit</Button>{" "}
         </Form>
       ) : (
-        <Form onSubmit={SignUp}>
+        <Form className="login-form" onSubmit={SignUp}>
           <Form.Field>
             <label>Name</label>
             <input
@@ -122,9 +122,11 @@ function RenterUser() {
         </Form>
       )}
       <br></br>
-      <Button onClick={() => setLsToggle(!lsToggle)}>
-        {!lsToggle ? "Login" : "Sign Up"}{" "}
-      </Button>
+      <div>
+        <Button onClick={() => setLsToggle(!lsToggle)}>
+          {!lsToggle ? "Login" : "Sign Up"}{" "}
+        </Button>
+      </div>
       <Link to="/">Host Portal</Link>
     </div>
   );

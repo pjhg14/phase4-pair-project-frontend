@@ -62,11 +62,11 @@ function HostUser() {
   }
 
   return (
-    <div>
+    <div className="form-container">
       {errors && <p>{errors}</p>}
       <p>{lsToggle ? "Login" : "Sign Up"} as Host</p>
       {lsToggle ? (
-        <Form onSubmit={logIn}>
+        <Form className="login-form" onSubmit={logIn}>
           <Form.Field>
             <label>Email</label>
             <input
@@ -88,7 +88,7 @@ function HostUser() {
           <Button type="submit">Submit</Button>{" "}
         </Form>
       ) : (
-        <Form onSubmit={SignUp}>
+        <Form className="login-form" onSubmit={SignUp}>
           <Form.Field>
             <label>Name</label>
             <input
@@ -129,9 +129,11 @@ function HostUser() {
         </Form>
       )}
       <br></br>
-      <Button onClick={() => setLsToggle(!lsToggle)}>
-        {!lsToggle ? "Login" : "Sign Up"}{" "}
-      </Button>
+      <div>
+        <Button onClick={() => setLsToggle(!lsToggle)}>
+          {!lsToggle ? "Login" : "Sign Up"}{" "}
+        </Button>
+      </div>
       <Link to="/renter/portal">Renter Portal</Link>
     </div>
   );

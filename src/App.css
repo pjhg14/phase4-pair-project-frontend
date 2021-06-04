@@ -56,3 +56,21 @@
 #title {
   font-family: cursive;
 }
+
+.login-form {
+  width: 75%;
+  padding-left: 25%;
+}
+
+.ui.custom {
+  align-items: baseline;
+  justify-content: center;
+}
+
+#splash-image {
+  background-image: url("https://i.etsystatic.com/21635101/r/il/898e10/2623467226/il_1588xN.2623467226_sf6a.jpg");
+  background-size: 85%;
+  background-position: 50% 90%;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
