@@ -11,7 +11,7 @@ function HostForm() {
 
   function update(event) {
     event.preventDefault();
-    fetch("http://localhost:3000/hosts/1", {
+    fetch("http://localhost:3000/hosts/edit", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -66,7 +66,7 @@ function HostForm() {
             onChange={(e) => setPhone(e.target.value)}
           />
         </Form.Field>
-        <Button type="submit">Submit</Button>{" "}
+        <Button type="submit">Submit</Button>
       </Form>
     </div>
   );

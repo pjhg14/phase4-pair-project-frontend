@@ -67,13 +67,12 @@ function RentalList() {
 
   return (
     <div>
-      {type === "host" ? <p></p> : <p></p>}
       <p>
-        Welcome! <Link to="/hostinfo"> {host.name}</Link>
+        Welcome! <Link to="/hostinfo"> {host.name} </Link>
       </p>
       <h4>Rentals:</h4>
-      <Link to={`/rentalform/host/${host.id}`}>New Rental</Link>
-      <div>{rentalList}</div>
+      <Link to={`/rentalform/host/${host.id}`}> New Rental </Link>
+      <div> {rentalList} </div>
     </div>
   );
 }

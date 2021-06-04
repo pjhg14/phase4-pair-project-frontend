@@ -19,10 +19,9 @@ function RentalInfo({ rental_id }) {
         // Authorization: `Bearer ${localStorage.token}`,
       },
     })
-      .then((resp) => resp.json())
-      .then(function (displayRental) {
+      .then(resp => resp.json())
+      .then(displayRental => {
         console.log(displayRental);
-        console.log(rental_id);
         setRental(displayRental);
         setIsLoaded(true);
       });

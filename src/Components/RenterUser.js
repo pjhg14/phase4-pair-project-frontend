@@ -29,7 +29,7 @@ function RenterUser() {
       .then((res) => res.json())
       .then((message) => {
         localStorage.token = message.token;
-        history.push("/rentals/renter");
+        history.push("/renterpage");
       });
   }
 
@@ -51,7 +51,7 @@ function RenterUser() {
       .then((res) => res.json())
       .then((message) => {
         localStorage.token = message.token;
-        history.push("/rentals/renter");
+        history.push("/renterpage");
       });
   }
 
