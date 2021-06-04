@@ -39,7 +39,7 @@ function RenterPage() {
                 <Popup content="Log Off" trigger={<Icon name="power" onClick={() => logOff()} />} />
             </p>
             <Button onClick={() => setCardToggle(!cardToggle)}>
-                {cardToggle ? "All" : "Appointments"}
+                View {cardToggle ? "Appointments" : "All"}
             </Button>
             {cardToggle ? 
                 <div>

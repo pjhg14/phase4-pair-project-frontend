@@ -57,7 +57,7 @@ function AppointmentInfo({ id, forceUpdate }) {
                     <Link to={`/reserve/${id}`}>Update Appointment</Link>
                     <br></br>
                     <br></br>
-                    <Button onClick={handleDelete}>Cancel</Button>
+                    <Button onClick={handleDelete}>Cancel Appointment</Button>
                 </Modal.Description>
             </Modal.Content>
         </Modal>
